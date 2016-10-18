@@ -1,0 +1,111 @@
+
+
+.. _example_applications_plot_out_of_core_classification.py:
+
+
+======================================================
+Out-of-core classification of text documents
+======================================================
+
+This is an example showing how scikit-learn can be used for classification
+using an out-of-core approach: learning from data that doesn't fit into main
+memory. We make use of an online classifier, i.e., one that supports the
+partial_fit method, that will be fed with batches of examples. To guarantee
+that the features space remains the same over time we leverage a
+HashingVectorizer that will project each example into the same feature space.
+This is especially useful in the case of text classification where new
+features (words) may appear in each batch.
+
+The dataset used in this example is Reuters-21578 as provided by the UCI ML
+repository. It will be automatically downloaded and uncompressed on first run.
+
+The plot represents the learning curve of the classifier: the evolution
+of classification accuracy over the course of the mini-batches. Accuracy is
+measured on the first 1000 samples, held out as a validation set.
+
+To limit the memory consumption, we queue examples up to a fixed amount before
+feeding them to the learner.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_out_of_core_classification_001.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_out_of_core_classification_002.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_out_of_core_classification_003.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_out_of_core_classification_004.png
+            :scale: 47
+
+
+**Script output**::
+
+  downloading dataset (once and for all) into /home/travis/scikit_learn_data/reuters
+  untarring Reuters dataset...
+  done.
+  Test set is 965 documents (134 positive)
+    Passive-Aggressive classifier :          975 train docs (   114 positive)    965 test docs (   134 positive) accuracy: 0.910 in 1.63s (  597 docs/s)
+            Perceptron classifier :          975 train docs (   114 positive)    965 test docs (   134 positive) accuracy: 0.897 in 1.63s (  596 docs/s)
+                   SGD classifier :          975 train docs (   114 positive)    965 test docs (   134 positive) accuracy: 0.906 in 1.64s (  594 docs/s)
+        NB Multinomial classifier :          975 train docs (   114 positive)    965 test docs (   134 positive) accuracy: 0.861 in 1.66s (  585 docs/s)
+  
+  
+    Passive-Aggressive classifier :         3842 train docs (   527 positive)    965 test docs (   134 positive) accuracy: 0.944 in 4.37s (  878 docs/s)
+            Perceptron classifier :         3842 train docs (   527 positive)    965 test docs (   134 positive) accuracy: 0.934 in 4.38s (  877 docs/s)
+                   SGD classifier :         3842 train docs (   527 positive)    965 test docs (   134 positive) accuracy: 0.938 in 4.38s (  877 docs/s)
+        NB Multinomial classifier :         3842 train docs (   527 positive)    965 test docs (   134 positive) accuracy: 0.874 in 4.41s (  872 docs/s)
+  
+  
+    Passive-Aggressive classifier :         6767 train docs (   832 positive)    965 test docs (   134 positive) accuracy: 0.943 in 6.98s (  969 docs/s)
+            Perceptron classifier :         6767 train docs (   832 positive)    965 test docs (   134 positive) accuracy: 0.947 in 6.98s (  969 docs/s)
+                   SGD classifier :         6767 train docs (   832 positive)    965 test docs (   134 positive) accuracy: 0.950 in 6.98s (  968 docs/s)
+        NB Multinomial classifier :         6767 train docs (   832 positive)    965 test docs (   134 positive) accuracy: 0.886 in 7.01s (  965 docs/s)
+  
+  
+    Passive-Aggressive classifier :         9707 train docs (  1278 positive)    965 test docs (   134 positive) accuracy: 0.951 in 9.84s (  986 docs/s)
+            Perceptron classifier :         9707 train docs (  1278 positive)    965 test docs (   134 positive) accuracy: 0.937 in 9.84s (  986 docs/s)
+                   SGD classifier :         9707 train docs (  1278 positive)    965 test docs (   134 positive) accuracy: 0.948 in 9.85s (  985 docs/s)
+        NB Multinomial classifier :         9707 train docs (  1278 positive)    965 test docs (   134 positive) accuracy: 0.901 in 9.87s (  983 docs/s)
+  
+  
+    Passive-Aggressive classifier :        12012 train docs (  1473 positive)    965 test docs (   134 positive) accuracy: 0.953 in 12.43s (  966 docs/s)
+            Perceptron classifier :        12012 train docs (  1473 positive)    965 test docs (   134 positive) accuracy: 0.954 in 12.43s (  966 docs/s)
+                   SGD classifier :        12012 train docs (  1473 positive)    965 test docs (   134 positive) accuracy: 0.951 in 12.44s (  965 docs/s)
+        NB Multinomial classifier :        12012 train docs (  1473 positive)    965 test docs (   134 positive) accuracy: 0.906 in 12.47s (  963 docs/s)
+  
+  
+    Passive-Aggressive classifier :        14600 train docs (  1811 positive)    965 test docs (   134 positive) accuracy: 0.948 in 15.05s (  969 docs/s)
+            Perceptron classifier :        14600 train docs (  1811 positive)    965 test docs (   134 positive) accuracy: 0.953 in 15.06s (  969 docs/s)
+                   SGD classifier :        14600 train docs (  1811 positive)    965 test docs (   134 positive) accuracy: 0.951 in 15.06s (  969 docs/s)
+        NB Multinomial classifier :        14600 train docs (  1811 positive)    965 test docs (   134 positive) accuracy: 0.912 in 15.09s (  967 docs/s)
+  
+  
+    Passive-Aggressive classifier :        17307 train docs (  2137 positive)    965 test docs (   134 positive) accuracy: 0.954 in 17.47s (  990 docs/s)
+            Perceptron classifier :        17307 train docs (  2137 positive)    965 test docs (   134 positive) accuracy: 0.951 in 17.47s (  990 docs/s)
+                   SGD classifier :        17307 train docs (  2137 positive)    965 test docs (   134 positive) accuracy: 0.961 in 17.48s (  990 docs/s)
+        NB Multinomial classifier :        17307 train docs (  2137 positive)    965 test docs (   134 positive) accuracy: 0.919 in 17.51s (  988 docs/s)
+
+
+
+**Python source code:** :download:`plot_out_of_core_classification.py <plot_out_of_core_classification.py>`
+
+.. literalinclude:: plot_out_of_core_classification.py
+    :lines: 25-
+
+**Total running time of the example:**  21.14 seconds
+( 0 minutes  21.14 seconds)
+    
